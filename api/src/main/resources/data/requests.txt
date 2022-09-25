@@ -1,0 +1,11 @@
+--- To create new appointment -------
+
+{
+  "appointmentDate": "2022-09-26",
+  "doctorId": 1,
+  "endTime": "05:30",
+  "patientId": 2,
+  "startTime": "05:00"
+}
+
+---

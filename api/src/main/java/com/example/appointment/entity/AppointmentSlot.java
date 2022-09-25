@@ -24,7 +24,7 @@ public class AppointmentSlot implements Serializable {
 
     private LocalDate appointmentDate;
     private LocalTime startTime;
-    private LocalTime endTimeTime;
+    private LocalTime endTime;
     private String status; //BOOKED,AVAILABLE
 
 }

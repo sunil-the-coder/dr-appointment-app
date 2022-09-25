@@ -31,7 +31,8 @@ public class Appointment implements Serializable {
 
     private LocalDate appointmentDate;
     private LocalTime startTime;
-    private LocalTime endTimeTime;
+    private LocalTime endTime;
+    private String status; // CANCELLED, SERVED
 
     @CreationTimestamp
     @Column(updatable = false)

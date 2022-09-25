@@ -13,28 +13,28 @@ import java.util.List;
 public class DoctorController {
 
     @Autowired
-    private DoctorService DoctorService;
+    private DoctorService doctorService;
 
     @GetMapping(path = {""})
     public List<Doctor> getDoctors() {
-        return DoctorService.getAllDoctors();
+        return doctorService.getAllDoctors();
     }
 
     @GetMapping(path = {"/{id}"})
     public Doctor getDoctor(@PathVariable("id") long id) {
-        Doctor Doctor = DoctorService.getDoctor(id);
+        Doctor Doctor = doctorService.getDoctor(id);
         return Doctor;
     }
     
     @PostMapping(path = {"/register"})
     public boolean registerDoctor(@RequestBody Doctor Doctor) {
-        boolean isRegistered = DoctorService.registerDoctor(Doctor);
+        boolean isRegistered = doctorService.registerDoctor(Doctor);
         return isRegistered;
     }
 
     @PostMapping(path = {"/login"})
     public Doctor authenticateDoctor(@RequestBody LoginDto loginDto) {
-        return DoctorService.DoctorLogin(loginDto);
+        return doctorService.loginDoctor(loginDto);
     }
 
 }
