@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="20222509202022" author="Sunil">
+		<sql>
+			INSERT INTO patient(full_name, password, email, mobile, gender ) VALUES
+			('Sunil Patil','user123','sunilnobeltraining@gmail.com','+91 8055812181','Male'),
+			('Juhi Mitter','nG3r%H`r*J','brahmbhatt.nupur@dutt.com','+91 907 0198136','Male'),
+			('Peter Varughese',')=@azOSFbt''WR6Oxfn','qtandon@gmail.com','036 11710838','Male'),
+			('Iqbal Chandra Borde',']A=n[sLGrE3.ylPJas7','agarwal.rosey@rediffmail.com','+91 543 4776169','Male'),
+			('Pranab Kumar Sodhani','+rd[y\,XDH`hftH_=hc','padama60@yahoo.com','+91 81 27248665','Male'),
+			('Mitesh Raj Pardeshi','se5_5LCKN$\p32','qnazareth@chandra.co.in','+91 185 3298215','Male'),
+			('Marlo Lalit Mathew','*E|xhT|0^','bhat.yadu@yahoo.co.in','+91 761 1468101','Male'),
+			('Govind Dev Sahni','yrc$$+n','dbiswas@doctor.ac.in','+91 39 45968211','Male'),
+			('Mridula Javed Meka','6~~p4:#+P16i','usman.atwal@kulkarni.com','046 34132540','Male'),
+			('Runjhun De','tS9bH}T','radhika.sandhu@hotmail.com','+91 149 4172021','Male'),
+			('Saurabh Meka','bdAxO~.6}pmHd9y~','vaidya.krishna@lala.in','098 62856729','Male'),
+			('Kajol Suri','=~u:{=P','kalpana.deo@yahoo.com','028 42139096','Male'),
+			('Chand Biyani','>}#[;%A}o7?HGGR9','hemendra04@gmail.com','+91 40 76360164','Male'),
+			('Umesh Parmer','g+qm\,j\,ZS\,#+x=','choudhary.hari@yahoo.co.in','+91 69 56614871','Male'),
+			('Drishti Monin Peri','-gg]wgV%~','geetanjali.sunder@yahoo.com','0592 7385796','Male'),
+			('Jobin Shashank Keer','z]FpW^_Rwyk7','urvashi.masih@hotmail.com','+91 98 45686044','Male'),
+			('Kajol Aadil Bala','0.!b5,A!ZR1e8#','munshi.venkat@rampersaud.ac.in','+91 81 39440954','Male'),
+			('Vaishali Devi','/5:M5j}\,\"7w[vNMSf','hira66@dial.com','0740 6707081','Male'),
+			('Usha Aadil Krishnamurthy','3*0gylX','mona92@yahoo.co.in','046 83009265','Male'),
+			('Bishnu Narain','txiKT}#lPfG]yk','rimi90@misra.com','+91 76 45109383','Male'),
+			('Deepesh Dhar','%oIuzqr\,JtGir-=C0V','agill@hotmail.com','0069 2406946','Male'),
+			('Mohit Ajeet Gala','FZF%)E2HSAA','spandit@yahoo.co.in','026 56899466','Male'),
+			('Samir Wable','=Bl)ZX''*>[.G''gX`geR','lal.umar@yahoo.co.in','019 49643685','Male'),
+			('Aisha Qabool Warrior','SIWIc1KG]I^','drau@gala.com','+91 991 8430618','Male'),
+			('Nutan Majumdar','n:5r-3W}t?p','kunti.puri@gulati.in','+91 986 7600333','Male'),
+			('Charandeep Raj Chada','Mb3r-\"E4g6}?#','pingle.esha@panchal.com','0861 1524537','Male'),
+			('Aniruddh Sastry','*pl8+Q''#;M571I$NC6-/','framson@gmail.com','0079 1958266','Male'),
+			('Aditya Savant','qyOW\ZgSYs-nZU2[iEIx','aayushman.nath@naidu.org','021 48203041','Male'),
+			('Monin Sawhney','''~5?[+}-iB85}','riya06@srinivasan.com','+91 940 4972122','Male'),
+			('Geetanjali Lad','#$bmd1b=','awason@oza.com','+91 938 2683871','Male'),
+			('Hetan Deepesh Krishnamurthy','xf\"`}0rF@V*k^a;nK#4','raman.faisal@yahoo.co.in','+91 78 36896516','Male'),
+			('Mitesh Pratap Sathe','K4t>dIinQ.4WHN0lwn\"-','parminder.pillay@yahoo.com','0732 6060176','Male'),
+			('Upasana Ravi','9I!?YvRr:)-gC','wtiwari@hotmail.com','+91 981 5217336','Male'),
+			('Hanuman Manish Bera','F1a5ykVsyP*(l','mittal.ajay@vasa.in','+91 748 0313770','Male'),
+			('Kim Patel','/{%_|5:[cQ8vT;cutu','amir.gade@brahmbhatt.org','099 38673769','Female'),
+			('Navami Thaman','WQasTg%?YZr+lYgqV6','amrita.bhatia@yahoo.co.in','+91 06 26173037','Female'),
+			('Charu Babu','Drn?^^H\Y','nidhi77@yahoo.com','+91 614 0917094','Female'),
+			('Radheshyam Rao Balay','KC}_l8U\)Y.CcOu','yasmin.somani@ghose.in','+91 81 60580238','Female'),
+			('Seema Murthy','?IW3$d','mittal.yadu@rediffmail.com','0361 0235110','Female'),
+			('Chirag Lalit Malhotra','9yNIK9>`#%l@puEf','aayushman.datta@rediffmail.com','+91 942 9584145','Female'),
+			('Kartik Anil Kakar','=yOk.hufVo9@L\,bD','hsetty@gmail.com','+91 869 1011665','Female'),
+			('Anand Kumar More','rMb)T8Kw3rCN|','jayshree64@dodiya.in','+91 68 06976939','Female'),
+			('Aadil Khurana','U_*-4-V>dAk','pbalakrishnan@sankar.in','+91 901 2491773','Female'),
+			('Ishat Jani','^ptT@k~51}2N8EP2v/','tkadakia@rediffmail.com','053 21356993','Female'),
+			('Seema Radheshyam Saini','QVJ#','randhawa.lakshmi@amble.in','011 82827359','Female'),
+			('Atul Bhasin','wd1}=/xegbo','ramnarine.padmini@ganguly.com','072 78920743','Female'),
+			('Arjun Ibrahim Reddy','6)tkV=Q2?^@$','loyal.megha@hotmail.com','+91 781 5982182','Female'),
+			('Yogesh Bhai Pandit','i\,ft{8^eCi5','ylall@yahoo.co.in','+91 726 2655289','Female'),
+			('Raju Nori','sK7?Fq\V=rxw','tsarin@rattan.co.in','+91 60 38927458','Female'),
+			('Radhika Arjun Datta','}_@#\"8','jawahar15@chaudhuri.net','+91 00 09421920','Female'),
+			('Mahmood Bawa','M4#E[=l@-RD''r3)3','aarif38@ganguly.org','0609 4583590','Female');
+		</sql>
+	</changeSet>
+</databaseChangeLog>

@@ -7,10 +7,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "patient")
+@Table(name = "doctor")
 @Getter
 @Setter
-public class Patient implements Serializable {
+public class Doctor implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,8 @@ public class Patient implements Serializable {
     private String email;
     private String mobile;
     private String gender; // MALE/FEMALE - enum to be use
+    private String speciality; // Dermatologist, Urologist,Psychiatrist
+    private int experience;
 
 //    @OneToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "role_id", referencedColumnName = "id")
