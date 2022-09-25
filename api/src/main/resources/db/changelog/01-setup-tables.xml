@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="20222509202022" author="Sunil">
+		<sql>
+			CREATE TABLE `doctor` (
+			`id` bigint NOT NULL AUTO_INCREMENT,
+			`email` varchar(255) DEFAULT NULL,
+			`experience` int NOT NULL,
+			`full_name` varchar(255) DEFAULT NULL,
+			`gender` varchar(255) DEFAULT NULL,
+			`mobile` varchar(255) DEFAULT NULL,
+			`password` varchar(255) DEFAULT NULL,
+			`speciality` varchar(255) DEFAULT NULL,
+			PRIMARY KEY (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+			CREATE TABLE `patient` (
+			`id` bigint NOT NULL AUTO_INCREMENT,
+			`email` varchar(255) DEFAULT NULL,
+			`full_name` varchar(255) DEFAULT NULL,
+			`gender` varchar(255) DEFAULT NULL,
+			`mobile` varchar(255) DEFAULT NULL,
+			`password` varchar(255) DEFAULT NULL,
+			PRIMARY KEY (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+			CREATE TABLE `role` (
+			`id` bigint NOT NULL AUTO_INCREMENT,
+			`created_on` datetime DEFAULT NULL,
+			`description` varchar(255) DEFAULT NULL,
+			`modified_on` datetime DEFAULT NULL,
+			`role_code` varchar(255) DEFAULT NULL,
+			`role_type` varchar(255) DEFAULT NULL,
+			PRIMARY KEY (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+			CREATE TABLE `appointment_slot` (
+			`id` bigint NOT NULL AUTO_INCREMENT,
+			`appointment_date` date DEFAULT NULL,
+			`end_time` time DEFAULT NULL,
+			`start_time` time DEFAULT NULL,
+			`status` varchar(255) DEFAULT NULL,
+			`doctor_id` bigint DEFAULT NULL,
+			PRIMARY KEY (`id`),
+			KEY `FKb88e0qlwkady907krxcwmy7q0` (`doctor_id`),
+			CONSTRAINT `FKb88e0qlwkady907krxcwmy7q0` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+			CREATE TABLE `appointment` (
+			`id` bigint NOT NULL AUTO_INCREMENT,
+			`appointment_date` date DEFAULT NULL,
+			`created_on` datetime DEFAULT NULL,
+			`end_time` time DEFAULT NULL,
+			`modified_on` datetime DEFAULT NULL,
+			`start_time` time DEFAULT NULL,
+			`status` varchar(255) DEFAULT NULL,
+			`doctor_id` bigint DEFAULT NULL,
+			`patient_id` bigint DEFAULT NULL,
+			PRIMARY KEY (`id`),
+			KEY `FKoeb98n82eph1dx43v3y2bcmsl` (`doctor_id`),
+			KEY `FK4apif2ewfyf14077ichee8g06` (`patient_id`),
+			CONSTRAINT `FK4apif2ewfyf14077ichee8g06` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`),
+			CONSTRAINT `FKoeb98n82eph1dx43v3y2bcmsl` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`)
+			) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+		</sql>
+	</changeSet>
+</databaseChangeLog>

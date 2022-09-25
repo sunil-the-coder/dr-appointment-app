@@ -1,3 +1,25 @@
+----- Initial Steps -------
+
+1. create database on mysql server
+
+    $ create datatabase appointments;
+
+2. Run the application with below settings
+
+    spring.jpa.hibernate.ddl-auto=create
+
+    It will setup all tables structure.
+
+3. Truncate entries from databasechangelog
+
+    $ truncate table databasechangelog;
+
+4. Restart the application with below settings
+
+     spring.jpa.hibernate.ddl-auto=validate
+
+------------------------------------------------------------------
+
 --- To create new appointment -------
 
 {
@@ -8,4 +30,29 @@
   "startTime": "05:00"
 }
 
----
+--- Get Dr appointments --------
+
+http://localhost:8080/api/appointments/doctor/1
+
+[
+  {
+    "id": 1,
+    "doctorName": "Dr. Mangesh Shinde",
+    "patientName": "Sunil Patil",
+    "appointmentDate": "2022-09-26",
+    "startTime": "10:00:00",
+    "endTime": "10:30:00",
+    "status": "SCHEDULLED"
+  },
+  {
+    "id": 2,
+    "doctorName": "Dr. Mangesh Shinde",
+    "patientName": "Juhi Mitter",
+    "appointmentDate": "2022-09-26",
+    "startTime": "05:00:00",
+    "endTime": "05:30:00",
+    "status": "SCHEDULLED"
+  }
+]
+
+---------

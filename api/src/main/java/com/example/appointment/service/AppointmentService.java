@@ -1,15 +1,15 @@
 package com.example.appointment.service;
 
-import com.example.appointment.dto.AppointmentDto;
+import com.example.appointment.config.exception.NoAppointmentSlotAvailable;
+import com.example.appointment.dto.AppointmentRequestDto;
+import com.example.appointment.dto.AppointmentResponseDto;
 import com.example.appointment.entity.Appointment;
 import com.example.appointment.entity.AppointmentSlot;
 import com.example.appointment.entity.Doctor;
 import com.example.appointment.entity.Patient;
+import com.example.appointment.mapper.EntityToDtoMapper;
 import com.example.appointment.repository.AppointmentRepository;
 import com.example.appointment.repository.AppointmentSlotRepository;
-import com.example.appointment.repository.DoctorRepository;
-import com.example.appointment.repository.PatientRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -43,54 +43,62 @@ public class AppointmentService {
         return appointmentRepository.findAll();
     }
 
-    public List<Appointment> getDoctorAppointments(Long doctorId) {
-        return appointmentRepository.findByDoctor(doctorService.getDoctor(doctorId));
+    public List<AppointmentResponseDto> getDoctorAppointments(Long doctorId) {
+        List<Appointment> appointments = appointmentRepository.findByDoctor(doctorService.getDoctor(doctorId));
+        List<AppointmentResponseDto> responseDtoList = EntityToDtoMapper.mapToDto(appointments);
+        return responseDtoList;
     }
 
-    public List<Appointment> getPatientAppointments(Long patientId) {
-        return appointmentRepository.findByPatient(patientService.getPatient(patientId));
+    public List<AppointmentResponseDto> getPatientAppointments(Long patientId) {
+        List<Appointment> appointments = appointmentRepository.findByPatient(patientService.getPatient(patientId));
+        List<AppointmentResponseDto> responseDtoList = EntityToDtoMapper.mapToDto(appointments);
+        return responseDtoList;
     }
 
     @Transactional
-    public Appointment takeAppointment(AppointmentDto appointmentDto) {
+    public AppointmentResponseDto registerAppointment(AppointmentRequestDto appointmentRequestDto) throws NoAppointmentSlotAvailable {
         Appointment appointment  = new Appointment();
-        appointment.setAppointmentDate(appointmentDto.getAppointmentDate());
-        String[] startTime = appointmentDto.getStartTime().split(":");
-        String[] endTime = appointmentDto.getEndTime().split(":");
+        appointment.setAppointmentDate(appointmentRequestDto.getAppointmentDate());
+        String[] startTime = appointmentRequestDto.getStartTime().split(":");
+        String[] endTime = appointmentRequestDto.getEndTime().split(":");
 
         LocalTime localStartTime = LocalTime.of(Integer.parseInt(startTime[0]), Integer.parseInt(startTime[1]));
         appointment.setStartTime(localStartTime);
         LocalTime localEndTime = LocalTime.of(Integer.parseInt(endTime[0]), Integer.parseInt(endTime[1]));
         appointment.setEndTime(localEndTime);
 
-        Doctor doctor = doctorService.getDoctor(appointmentDto.getDoctorId());
+        Doctor doctor = doctorService.getDoctor(appointmentRequestDto.getDoctorId());
         appointment.setDoctor(doctor);
-        Patient patient = patientService.getPatient(appointmentDto.getPatientId());
+        Patient patient = patientService.getPatient(appointmentRequestDto.getPatientId());
         appointment.setPatient(patient);
         appointment.setStatus("SCHEDULLED");
+
+        //Make new entry as scheduled appointment
         appointmentRepository.save(appointment);
 
 
         //Update slot as booked.
         AppointmentSlot appointmentSlot = appointmentSlotRepository.findByDoctorAndAppointmentDateAndStartTimeAndEndTime(doctor,
-                appointmentDto.getAppointmentDate(), localStartTime, localEndTime);
+                appointmentRequestDto.getAppointmentDate(), localStartTime, localEndTime);
         appointmentSlot.setStatus("BOOKED");
-        appointmentSlotRepository.save(appointmentSlot);
 
-        //Send email to Dr and Patient - Time consuming task
-        new Thread(() -> {
-            SimpleMailMessage msg = new SimpleMailMessage();
-            msg.setText("Doctor's Appointment Booked");
-            msg.setTo(patient.getEmail(), doctor.getEmail());
-            msg.setText("Appointment Details - \n  Doctor Name - "+doctor.getFullName()+"\n Patient Name - "+patient.getFullName()+"\n Date and Time - "+appointment.getAppointmentDate()+" "+appointment.getStartTime()+"-"+appointment.getEndTime());
-            emailSenderService.sendEmail(msg);
-        }).start();
+        if(appointmentSlot != null) {
+            appointmentSlotRepository.save(appointmentSlot);
 
+            //Send email to Dr and Patient - Time consuming task
+            new Thread(() -> {
+                SimpleMailMessage msg = new SimpleMailMessage();
+                msg.setText("Doctor's Appointment Booked");
+                msg.setTo(patient.getEmail(), doctor.getEmail());
+                msg.setText("Appointment Details - \n  Doctor Name - " + doctor.getFullName() + "\n Patient Name - " + patient.getFullName() + "\n Date and Time - " + appointment.getAppointmentDate() + " " + appointment.getStartTime() + "-" + appointment.getEndTime());
+                emailSenderService.sendEmail(msg);
+            }).start();
 
-        //Just alternative - ideally to use DTO object here.
-        appointment.getDoctor().setPassword("");
+        }else
+            throw new NoAppointmentSlotAvailable("Slot Not Available");
 
-        return appointment;
+       return EntityToDtoMapper.mapToDto(appointment);
+
     }
 
     public boolean cancelAppointment(Long appointmentId) {

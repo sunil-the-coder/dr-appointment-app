@@ -37,7 +37,7 @@ public class PatientService {
         return true;
     }
 
-    public Patient patientLogin(LoginDto loginDto) {
+    public Patient authenticatePatient(LoginDto loginDto) {
         try {
             return Optional.ofNullable(patientRepository.findByEmailAndPassword(loginDto.getEmailId(), loginDto.getPassword())).get();
         } catch (Exception e) {

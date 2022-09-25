@@ -9,16 +9,7 @@
 		<sql>
 			INSERT INTO doctor (full_name, password, email, mobile, gender, speciality, experience) VALUES
 			('Dr. Mangesh Shinde','Doctor123','mangeshshinde8149@gmail.com','+918063895566','Male','Ontologist',10),
-			('Neoma Smitham MD','Doctor123','janessa.kautzer@parker.com','513-793-4474','Male','Ontologist',10),
-			('Nathaniel Spencer','Doctor123','runolfsson.verla@will.com','1-738-732-2308 x29888','Female','Anaesthesiologist\,',15),
-			('Antone Wehner','Doctor123','bosco.michale@wilderman.com','1-986-271-5433','Male','Orthopaedist',5),
-			('Earl Larkin','Doctor123','mstreich@hotmail.com','(318) 368-2700 x29181','Male','Dermatologist\,Dietitian',8),
-			('Ebony Herman','Doctor123','ichamplin@bins.info','1-280-305-3339 x4897','Female','Ontologist',6),
-			('Maximus O''Hara','Doctor123','josinski@hotmail.com','1-659-463-2050','Female','Gynaecologist ',7),
-			('Romaine Windler','Doctor123','sryan@yahoo.com','916.648.5555 x4570','Male','Ontologist',12),
-			('Nickolas Eichmann IV','Doctor123','schneider.bertram@mclaughlin.net','+1.545.704.2721','Female','Gastroenterologist',12),
-			('Laurie Bauch','Doctor123','mallie01@stehr.com','238-421-0367 x446','Female','Ontologist',11),
-			('Ms. Elisa Oberbrunner III','Doctor123','jane.graham@yahoo.com','-4166','Male','General physician',8);
+			('Dr. Rahul Kolawale','Doctor123','rahulkolawale09@gmail.com','+918055313331','Male','Cardiologist,Dermatologist',12);
 		</sql>
 	</changeSet>
 </databaseChangeLog>

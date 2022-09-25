@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+	<changeSet id="20222509202025" author="Sunil">
+		<sql>
+			INSERT INTO appointment (appointment_date,end_time,start_time,status,doctor_id,patient_id,created_on, modified_on) VALUES
+			('2022-09-26','10:30:00','10:00:00','SCHEDULLED', 1, 2, now(), now()),
+			('2022-09-26','06:30:00','06:00:00','SCHEDULLED', 1, 2, now(), now()),
+			('2022-09-26','12:30:00','12:00:00','SCHEDULLED', 2, 2, now(), now());
+
+			update appointment_slot
+			set status='BOOKED'
+			where appointment_date='2022-09-26' and start_time='10:00:00' and end_time='10:30:00' and doctor_id=1;
+
+			update appointment_slot
+			set status='BOOKED'
+			where appointment_date='2022-09-26' and start_time='06:00:00' and end_time='06:30:00' and doctor_id=1;
+
+			update appointment_slot
+			set status='BOOKED'
+			where appointment_date='2022-09-26' and start_time='12:00:00' and end_time='12:30:00' and doctor_id=2;
+		</sql>
+	</changeSet>
+</databaseChangeLog>

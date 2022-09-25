@@ -5,12 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class AppointmentDto {
+public class AppointmentRequestDto {
     private Long id;
     private Long doctorId;
     private Long patientId;

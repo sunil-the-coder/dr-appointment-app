@@ -34,7 +34,7 @@ public class PatientController {
 
     @PostMapping(path = {"/login"})
     public Patient authenticatePatient(@RequestBody LoginDto loginDto) {
-        return patientService.patientLogin(loginDto);
+        return patientService.authenticatePatient(loginDto);
     }
 
 }
