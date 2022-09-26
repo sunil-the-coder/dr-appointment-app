@@ -2,11 +2,11 @@ import React, { useContext, useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import firebase from 'firebase/app';
 import 'firebase/auth';
 import { useHistory, useLocation } from 'react-router-dom';
 import { UserContext } from '../../../App';
 import loginBG from '../../../images/loginBG.png';
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -31,7 +31,7 @@ const Login = () => {
     console.log(loggedInUser);
     const history = useHistory();
     const location = useLocation();
-    const { from } = location.state || { from: { pathname: '/' } };
+    const { from } = location.state || { from: { pathname: '/home' } };
     const classes = useStyles();
     // create state variables for each input
     const [firstName, setFirstName] = useState('');
@@ -42,6 +42,17 @@ const Login = () => {
 
     const signUpSubmit = () => {
         console.log(firstName, lastName, email, password);
+        //Post Singnup Data
+        axios.post('/register', {
+            firstName:firstName,
+            lastName:lastName,
+            email:email,
+            password:password
+        }).then((response) => {
+            console.log(response);
+        }, (error) => {
+            console.log(error);
+        });
         setLoggedInUser({ name: "Mangesh Shinde", email:"mangeshshinde@gmail.com"});
         sessionStorage.setItem('token', "SGVsbG8sIHdvcmxkIQ==");
         history.replace(from);
@@ -49,6 +60,15 @@ const Login = () => {
 
     function loginSubmit() {
         console.log(email, password);
+        //login
+        axios.post('/login', {
+            email:email,
+            password:password
+        }).then((response) => {
+            console.log(response);
+        }, (error) => {
+            console.log(error);
+        });
         setLoggedInUser({ name: "Mangesh Shinde", email:email, password: password});
         sessionStorage.setItem('token', "SGVsbG8sIHdvcmxkIQ==");
         history.replace(from);

@@ -36,7 +36,7 @@ const Sidebar = () => {
         >
             <ul className="list-unstyled">
                 <li>
-                    <Link to="/" className="text-white">
+                    <Link to="/home" className="text-white">
                         <FontAwesomeIcon icon={faHome} /> <span>Home</span>
                     </Link>
                 </li>

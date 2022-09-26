@@ -19,6 +19,9 @@ function App() {
             <Router>
                 <Switch>
                     <Route exact path="/">
+                        <Login />
+                    </Route>
+                    <Route path="/home">
                         <Home />
                     </Route>
                     <Route path="/appointment">
@@ -30,9 +33,6 @@ function App() {
                     <PrivateRoute path="/allPatients">
                         <AllPatients />
                     </PrivateRoute>
-                    <Route path="/login">
-                        <Login />
-                    </Route>
                     <PrivateRoute path="/addDoctor">
                         <AddDoctor />
                     </PrivateRoute>
