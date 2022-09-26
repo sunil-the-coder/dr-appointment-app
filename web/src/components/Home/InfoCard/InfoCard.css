@@ -7,6 +7,9 @@
 .info-dark {
     background-color: #3a4256;
 }
+.nav-bar {
+    background-color: rgba(95,190,154,0.99);
+}
 .info-container {
     color: white;
     height: 100px;
