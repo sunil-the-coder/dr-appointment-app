@@ -41,12 +41,14 @@ const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
 
     const signUpSubmit = () => {
+        console.log(firstName, lastName, email, password);
         setLoggedInUser({ name: "Mangesh Shinde", email:"mangeshshinde@gmail.com"});
         sessionStorage.setItem('token', "SGVsbG8sIHdvcmxkIQ==");
         history.replace(from);
     };
 
     function loginSubmit() {
+        console.log(email, password);
         setLoggedInUser({ name: "Mangesh Shinde", email:email, password: password});
         sessionStorage.setItem('token', "SGVsbG8sIHdvcmxkIQ==");
         history.replace(from);
